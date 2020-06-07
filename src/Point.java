@@ -69,9 +69,9 @@ public class Point implements Comparable<Point> {
         double xdif = that.x - this.x;
         double ydif = that.y - this.y;
 
-        if (xdif==0 && ydif==0) return Double.NEGATIVE_INFINITY; //точки в одном месте
-        else if (xdif==0) return Double.POSITIVE_INFINITY; //на одной вертикали
-        else if (ydif==0) return +0.0; //на одной горизонтали
+        if (xdif == 0 && ydif == 0) return Double.NEGATIVE_INFINITY; //точки в одном месте
+        else if (xdif == 0) return Double.POSITIVE_INFINITY; //на одной вертикали
+        else if (ydif == 0) return +0.0; //на одной горизонтали
         else {
             return ydif/xdif; }
 
@@ -92,7 +92,7 @@ public class Point implements Comparable<Point> {
     public int compareTo(Point that) {
         if (this.y < that.y) return -1;
         else if (this.y == that.y && this.x == that.x) return 0;
-        else if(this.y == that.y && this.x < that.x) return -1;
+        else if (this.y == that.y && this.x < that.x) return -1;
         else return +1;
 
     }
@@ -109,8 +109,8 @@ public class Point implements Comparable<Point> {
 
     private class SlopeOrder implements Comparator<Point> {
         public int compare(Point p1, Point p2) {
-            double a = Point.this.slopeTo(p1); //to access invoking point
-            double b = Point.this.slopeTo(p2); //to access invoking point
+            double a = Point.this.slopeTo(p1); // to access invoking point
+            double b = Point.this.slopeTo(p2); // to access invoking point
 
             return Double.compare(a, b); // -1 less 0 eq +1 greater
 
@@ -134,14 +134,10 @@ public class Point implements Comparable<Point> {
      */
     public static void main(String[] args) {
         /* YOUR CODE HERE */
-        Point p1 = new Point(10000,0);
-        Point p2 = new Point (0,10000);
-        Point p3 = new Point(3000,7000);
-        Point p4 = new Point(7000,3000);
-        Point p5 = new Point(20000,21000);
-        Point p6 = new Point(3000,4000);
-        Point p7 = new Point(14000,15000);
-        Point p8 = new Point(6000,7000);;
+        Point p5 = new Point(20000, 21000);
+        Point p6 = new Point(3000, 4000);
+        Point p7 = new Point(14000, 15000);
+        Point p8 = new Point(6000, 7000);
         System.out.println(p6.slopeTo(p8));
         System.out.println(p6.slopeTo(p7));
         System.out.println(p6.slopeTo(p5));
