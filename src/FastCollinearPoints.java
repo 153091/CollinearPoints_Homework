@@ -14,6 +14,7 @@ public class FastCollinearPoints {
         Arrays.sort(copy);
 
         for (int i = 0; i <  copy.length - 3; i++) {
+        Arrays.sort(copy); // чтобы каждый раз выстраивать нужный изначальный порядок
 
             // Sort the points according to the slopes they makes with p.
             // Check if any 3 (or more) adjacent points in the sorted order

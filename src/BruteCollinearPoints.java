@@ -1,5 +1,4 @@
-import edu.princeton.cs.algs4.Stack;
-
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -15,44 +14,40 @@ import java.util.Arrays;
 
 public class BruteCollinearPoints {
 
-    private final LineSegment[] segments;
+    private ArrayList<LineSegment> segmentStack = new ArrayList<>();
 
     public BruteCollinearPoints(Point[] points) {   // finds all line segments containing 4 points
 
         if (points == null || hasDuplicate(points) || hasNull(points)) throw new IllegalArgumentException(); //если на входе null
 
-        Stack<LineSegment> segmentStack = new Stack<>();
 
-        Arrays.sort(points);
+        Point[] copy = points.clone();
+        Arrays.sort(copy);
 
-        for (int first = 0; first < points.length - 3; first++)
-            for (int second = first + 1; second < points.length - 2; second++) {
-                double slopeFS = points[first].slopeTo(points[second]);
-                for (int third = second + 1; third < points.length - 1; third++) {
-                    double slopeFT = points[first].slopeTo(points[third]);
+        for (int first = 0; first < copy.length - 3; first++)
+            for (int second = first + 1; second < copy.length - 2; second++) {
+                double slopeFS = copy[first].slopeTo(copy[second]);
+                for (int third = second + 1; third < copy.length - 1; third++) {
+                    double slopeFT = copy[first].slopeTo(copy[third]);
                             if (slopeFS == slopeFT) {
-                                for (int forth = third + 1; forth < points.length; forth++) {
-                                    double slopeFF = points[first].slopeTo(points[forth]);
+                                for (int forth = third + 1; forth < copy.length; forth++) {
+                                    double slopeFF = copy[first].slopeTo(copy[forth]);
                                     if (slopeFS == slopeFF)
-                                        segmentStack.push(new LineSegment(points[first], points[forth]));
+                                        segmentStack.add(new LineSegment(copy[first], copy[forth]));
                                 }
 
                             }
                 }
             }
 
-        int size = segmentStack.size();
-        segments = new LineSegment[size];
-        for (int i = 0; i < size; i++)
-            this.segments[i] = segmentStack.pop();
     }
 
     public int numberOfSegments()  { // the number of line segments
-        return this.segments.length;
+        return segmentStack.size();
     }
 
     public LineSegment[] segments() { // the line segments
-        return this.segments.clone();
+        return segmentStack.toArray(new LineSegment[segmentStack.size()]);
     }
 
 
